@@ -50,8 +50,19 @@ run;
 /* cashbk = ordinal  */
 
 proc freq data=hw_data.insurance_t;
+	tables cc;
+run;
+/*cc = binary */
+
+proc freq data=hw_data.insurance_t;
+	tables ccbal;
+run;
+/*ccbal = continuous */
+
+proc freq data=hw_data.insurance_t;
 	tables ccpurc;
 run;
+/*ccpurc = nominal */
 
 
 proc freq data=hw_data.insurance_t;
