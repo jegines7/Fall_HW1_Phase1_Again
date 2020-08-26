@@ -224,20 +224,3 @@ quit;
 /* VIF = 3.5 */
 
 
-
-
-
-/************************************************************/
-/* Provide a table of odds ratios for only binary predictor variables  */
-/* in relation to the target variable. */
-/************************************************************/
-
-/************************************************************/
-/* Provide a summary of results around the linearity assumption of continuous variables. */
-/************************************************************/
-
-
-/************************************************************/
-/* Provide a summary of important data considerations */
-/************************************************************/
-
