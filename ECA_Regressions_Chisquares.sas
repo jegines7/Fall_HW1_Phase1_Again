@@ -197,16 +197,11 @@ proc freq data=hw_data.insurance_t;
 run;
 
 /* Ins vs. DDA (MH Chi Square Test) */
-ods output parameterestimates=dda;
 proc freq data=hw_data.insurance_t;
 	tables dda*ins/chisq expected cellchi2 nocol nopercent relrisk;
 	title "MH Chi Square Test, Ins. vs. DDA";
 run;
 
-data dda1;
-	set dda;
-	format ;
-run;
 /* MH p-value <0.0001 */
 
 proc freq data=hw_data.insurance_t;
@@ -234,9 +229,28 @@ proc freq data=hw_data.insurance_t;
 	title "MH Chi Square Test, Ins. vs. moved";
 run;
 
+/* *Need full p-value for this one */
 proc freq data=hw_data.insurance_t;
 	tables branch*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	output out=branch chisq;
 	title "Likelihood Ratio Chi Square Test, Ins. vs. branch";
+run;
+
+data branch1;
+	set branch;
+	format p_lrchi dollar30.29;
+run;
+
+/* *Need full p-value for this one */
+proc freq data=hw_data.insurance_t;
+	tables mmcred*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	output out=mmcred chisq;
+	title "Likelihood Ratio Chi Square Test, Ins. vs. mmcred";
+run;
+
+data mmcred1;
+	set mmcred;
+	format p_mhchi dollar30.29;
 run;
 
 proc freq data=hw_data.insurance_t;
@@ -244,8 +258,14 @@ proc freq data=hw_data.insurance_t;
 	title "Likelihood Ratio Chi Square Test, Ins. vs. branch";
 run;
 
+/* need full p-value */
 proc freq data=hw_data.insurance_t;
 	tables ccpurc*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	output out=ccpurc chisq;
 	title "Likelihood Ratio Chi Square Test, Ins. vs. ccpurc";
 run;
 
+data ccpurc1;
+	set ccpurc;
+	format p_lrchi dollar30.29;
+run;
