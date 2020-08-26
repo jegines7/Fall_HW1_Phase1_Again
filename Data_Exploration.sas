@@ -181,14 +181,14 @@ run;
 
 /* Ins vs. Dirdep (MH Chi Square Test) */
 proc freq data=hw_data.insurance_t;
-	tables ins*dirdep/chisq expected cellchi2 nocol nopercent relrisk;
+	tables dirdep*ins/chisq expected cellchi2 nocol nopercent relrisk;
 	title "MH Chi Square Test, Ins. vs. Dirdep";
 run;
 /* MH p-value is <0.0001 */
 
 /* Ins vs. NSF (MH Chi Square Test) */
 proc freq data=hw_data.insurance_t;
-	tables nsf* ins/chisq expected cellchi2 nocol nopercent relrisk;
+	tables nsf*ins/chisq expected cellchi2 nocol nopercent relrisk;
 	title "MH Chi Square Test, Ins. vs. Nsf.";
 run;
 /* MH p-value is <0.0001 */
