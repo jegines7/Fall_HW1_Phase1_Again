@@ -17,12 +17,42 @@ proc print data=hw_data.insurance_T(obs=100);
 run;
 
 /************************************************************/
-*Determining variable types;
+*Determining variable types (Arranged in Alphabetical Order);
 /************************************************************/
 proc freq data=hw_data.insurance_t;
 	tables acctage;
 run;
 /* acctage = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables age;
+run;
+/* age = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables atm;
+run;
+/* atm = binary */
+
+proc freq data=hw_data.insurance_t;
+	tables atmamt;
+run;
+/* atmamt = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables branch;
+run;
+/* branch = nominal  */
+
+proc freq data=hw_data.insurance_t;
+	tables cashbk;
+run;
+/* cashbk = ordinal  */
+
+proc freq data=hw_data.insurance_t;
+	tables ccpurc;
+run;
+
 
 proc freq data=hw_data.insurance_t;
 	tables dda;
@@ -43,11 +73,6 @@ proc freq data=hw_data.insurance_t;
 	tables depamt;
 run;
 /* depamt = continuous */
-
-proc freq data=hw_data.insurance_t;
-	tables cashbk;
-run;
-/* cashbk = ordinal  */
 
 proc freq data=hw_data.insurance_t;
 	tables checks;
@@ -75,18 +100,11 @@ run;
 /* mmcred = ordinal */
 
 proc freq data=hw_data.insurance_t;
-	tables branch;
-run;
-/* branch = nominal  */
-
-proc freq data=hw_data.insurance_t;
 	tables res;
 run;
 /* res = nominal */
 
-proc freq data=hw_data.insurance_t;
-	tables ccpurc;
-run;
+
 
 /************************************************************/
 *Exploring Potential Redundancies;
