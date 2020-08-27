@@ -66,6 +66,26 @@ run;
 
 
 proc freq data=hw_data.insurance_t;
+	tables cd;
+run;
+/*cd = binary */
+
+proc freq data=hw_data.insurance_t;
+	tables cdbal;
+run;
+/*cdbal = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables checks;
+run;
+/* checks = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables crscore;
+run;
+/* crscore = continuous */
+
+proc freq data=hw_data.insurance_t;
 	tables dda;
 run;
 /* dda = binary */
@@ -86,14 +106,40 @@ run;
 /* depamt = continuous */
 
 proc freq data=hw_data.insurance_t;
-	tables checks;
-run;
-/* checks = continuous */
-
-proc freq data=hw_data.insurance_t;
 	tables dirdep;
 run;
 /* dirdep = binary */
+
+proc freq data=hw_data.insurance_t;
+	tables hmown;
+run;
+/* hmown = binary  */
+
+proc freq data=hw_data.insurance_t;
+	tables hmown;
+run;
+/* hmval = continuous  */
+
+proc freq data=hw_data.insurance_t;
+	tables ils;
+run;
+/* ils = binary  */
+
+proc freq data=hw_data.insurance_t;
+	tables ilsbal;
+run;
+/* ilsbal = continuous  */
+
+proc freq data=hw_data.insurance_t;
+	tables inarea;
+run;
+/* inarea = binary  */
+
+proc freq data=hw_data.insurance_t;
+	tables income;
+run;
+/* income = continuous  */
+
 
 proc freq data=hw_data.insurance_t;
 	tables nsf;
