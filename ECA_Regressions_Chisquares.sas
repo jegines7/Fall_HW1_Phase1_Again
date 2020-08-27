@@ -33,16 +33,14 @@ proc logistic data=hw_data.insurance_t alpha=0.002;
 	title 'Logistic Model (Effects Coding) with ccbal';
 run;
 
-/* Ins vs. Checks (Logistic Regression) */
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=checks/clodds=pl;
-	title 'Logistic Model (Effects Coding) with Number of Checks WRITTEN';
-run;
-*p-value for Analysis of Max Likelihood Estimates coefficient is <0.0001;
-
 proc logistic data=hw_data.insurance_t alpha=0.002;
 	model ins(event='1')=cdbal/clodds=pl;
 	title 'Logistic Model (Effects Coding) with cdbal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=checks/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Number of Checks WRITTEN';
 run;
 
 proc logistic data=hw_data.insurance_t alpha=0.002;
@@ -50,15 +48,12 @@ proc logistic data=hw_data.insurance_t alpha=0.002;
 	title 'Logistic Model (Effects Coding) with crscore';
 run;
 
-/* Ins vs. Ddabal (Logistic Regression) */
 ods output parameterestimates=ddabal;
 proc logistic data=hw_data.insurance_t alpha=0.002;
 	model ins(event='1')=ddabal/clodds=pl;
 	title 'Logistic Model (Effects Coding) with Checking Account Balance';
 run;
-*p-value for Analysis of Max Likelihood Estimates coefficient is <0.0001;
 
-/* Ins vs. Dep (Logistic Regression) */
 ods output parameterestimates=dep;
 proc logistic data=hw_data.insurance_t alpha=0.002;
 	model ins(event='1')=dep/clodds=pl;
@@ -84,6 +79,7 @@ proc logistic data=hw_data.insurance_t alpha=0.002;
 	model ins(event='1')=ilsbal/clodds=pl;
 	title 'Logistic Model (Effects Coding) with ilsbal';
 run;
+
 
 proc logistic data=hw_data.insurance_t alpha=0.002;
 	model ins(event='1')=income/clodds=pl;
@@ -150,79 +146,20 @@ proc logistic data=hw_data.insurance_t alpha=0.002;
 	title 'Logistic Model (Effects Coding) with Teller Visits';
 run;
 
-
-
 /* ************************** */
 /* Chi Square Tests */
 /* ************************** */
 
-/* Ins vs. Dirdep (MH Chi Square Test) */
 proc freq data=hw_data.insurance_t;
-	tables ins*dirdep/chisq expected cellchi2 nocol nopercent relrisk;
-	title "MH Chi Square Test, Ins. vs. Dirdep";
-run;
-/* MH p-value is <0.0001 */
-
-/* Ins vs. NSF (MH Chi Square Test) */
-proc freq data=hw_data.insurance_t;
-	tables nsf* ins/chisq expected cellchi2 nocol nopercent relrisk;
-	title "MH Chi Square Test, Ins. vs. Nsf.";
-run;
-/* MH p-value is <0.0001 */
-/* DF = 1 */
-/* Test statistic = 43.2028 */
-
-/* Ins vs. Cashbk - Binary vs. Ordinal (MH Chi Square Test) */
-proc freq data=hw_data.insurance_t;
-	tables cashbk*ins/chisq expected cellchi2 nocol nopercent relrisk;
-	title "MH Chi Square Test, Ins. vs. Cashbk";
-run;
-/* MH p-value is 0.0007 */
-
-/* Ins vs. Mmcred (MH Chi Square Test) */
-proc freq data=hw_data.insurance_t;
-	tables MMCRED*ins/chisq expected cellchi2 nocol nopercent relrisk;
-	title "MH Chi Square Test, Ins. vs. MMCRED";
-run;
-
-/* Ins vs. DDA (MH Chi Square Test) */
-proc freq data=hw_data.insurance_t;
-	tables dda*ins/chisq expected cellchi2 nocol nopercent relrisk;
-	title "MH Chi Square Test, Ins. vs. DDA";
-run;
-
-/* MH p-value <0.0001 */
-
-proc freq data=hw_data.insurance_t;
-	tables loc*ins/chisq expected cellchi2 nocol nopercent relrisk;
-	title "MH Chi Square Test, Ins. vs. loc";
-run;
-
-proc freq data=hw_data.insurance_t;
-	tables ils*ins/chisq expected cellchi2 nocol nopercent relrisk;
-	title "MH Chi Square Test, Ins. vs. ils";
-run;
-
-proc freq data=hw_data.insurance_t;
-	tables mtg*ins/chisq expected cellchi2 nocol nopercent relrisk;
-	title "MH Chi Square Test, Ins. vs. mtg";
-run;
-
-proc freq data=hw_data.insurance_t;
-	tables hmown*ins/chisq expected cellchi2 nocol nopercent relrisk;
-	title "MH Chi Square Test, Ins. vs. hmown";
-run;
-
-proc freq data=hw_data.insurance_t;
-	tables moved*ins/chisq expected cellchi2 nocol nopercent relrisk;
-	title "MH Chi Square Test, Ins. vs. moved";
+	tables atm*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. ATM";
 run;
 
 /* *Need full p-value for this one */
 proc freq data=hw_data.insurance_t;
 	tables branch*ins/chisq expected cellchi2 nocol nopercent relrisk;
 	output out=branch chisq;
-	title "Likelihood Ratio Chi Square Test, Ins. vs. branch";
+	title "Test of Assoc., Ins. vs. branch";
 run;
 
 data branch1;
@@ -230,11 +167,83 @@ data branch1;
 	format p_lrchi dollar30.29;
 run;
 
+proc freq data=hw_data.insurance_t;
+	tables cashbk*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. Cashbk";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables cc*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. cc";
+run;
+
+/* need full p-value */
+proc freq data=hw_data.insurance_t;
+	tables ccpurc*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	output out=ccpurc chisq;
+	title "Test of Assoc., Ins. vs. ccpurc";
+run;
+
+data ccpurc1;
+	set ccpurc;
+	format p_lrchi dollar30.29;
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables cd*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. cd";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables dda*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. DDA";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables dirdep*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. Dirdep";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables hmown*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. hmown";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables ils*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. ils";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables inarea*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. inarea";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables inv*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. inv";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables ira*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. ira";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables loc*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. loc";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables mm*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. mm";
+run;
+
 /* *Need full p-value for this one */
 proc freq data=hw_data.insurance_t;
 	tables mmcred*ins/chisq expected cellchi2 nocol nopercent relrisk;
 	output out=mmcred chisq;
-	title "Likelihood Ratio Chi Square Test, Ins. vs. mmcred";
+	title "Test of Assoc., Ins. vs. mmcred";
 run;
 
 data mmcred1;
@@ -243,18 +252,32 @@ data mmcred1;
 run;
 
 proc freq data=hw_data.insurance_t;
-	tables res*ins/chisq expected cellchi2 nocol nopercent relrisk;
-	title "Likelihood Ratio Chi Square Test, Ins. vs. branch";
+	tables moved*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. moved";
 run;
 
-/* need full p-value */
 proc freq data=hw_data.insurance_t;
-	tables ccpurc*ins/chisq expected cellchi2 nocol nopercent relrisk;
-	output out=ccpurc chisq;
-	title "Likelihood Ratio Chi Square Test, Ins. vs. ccpurc";
+	tables mtg*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. mtg";
 run;
 
-data ccpurc1;
-	set ccpurc;
-	format p_lrchi dollar30.29;
+
+proc freq data=hw_data.insurance_t;
+	tables nsf* ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. Nsf.";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables res*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. branch";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables sav*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. sav";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables sdb*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. sdb";
 run;
