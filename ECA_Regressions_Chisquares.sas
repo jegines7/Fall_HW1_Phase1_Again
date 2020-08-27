@@ -17,10 +17,37 @@ proc logistic data=hw_data.insurance_t alpha=0.002;
 run;
 *p-value for Analysis of Max Likelihood Estimates coefficient is 0.0079;
 
-/* Ins vs. Teller (logistic regression) */
+
 proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=teller/clodds=pl;
-	title 'Logistic Model (Effects Coding) with Teller Visits';
+	model ins(event='1')=age/clodds=pl;
+	title 'Logistic Model (Effects Coding) with age';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=atmamt/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Atmamt';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=ccbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with ccbal';
+run;
+
+/* Ins vs. Checks (Logistic Regression) */
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=checks/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Number of Checks WRITTEN';
+run;
+*p-value for Analysis of Max Likelihood Estimates coefficient is <0.0001;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=cdbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with cdbal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=crscore/clodds=pl;
+	title 'Logistic Model (Effects Coding) with crscore';
 run;
 
 /* Ins vs. Ddabal (Logistic Regression) */
@@ -31,80 +58,21 @@ proc logistic data=hw_data.insurance_t alpha=0.002;
 run;
 *p-value for Analysis of Max Likelihood Estimates coefficient is <0.0001;
 
-data mycoefficients1;
-	set mycoefficients;
-	format probchisq dollar30.29;
-run;
-
 /* Ins vs. Dep (Logistic Regression) */
 ods output parameterestimates=dep;
 proc logistic data=hw_data.insurance_t alpha=0.002;
 	model ins(event='1')=dep/clodds=pl;
 	title 'Logistic Model (Effects Coding) with Checking Deposits';
 run;
-*p-value for Analysis of Max Likelihood Estimates coefficient is <0.0001;
 
 data dep1;
 	set dep;
 	format probchisq dollar30.29;
 run;
 
-/* Ins vs. Depamt (Logistic Regression) */
 proc logistic data=hw_data.insurance_t alpha=0.002 outest=ins_depamt_reg;
 	model ins(event='1')=depamt/clodds=pl;
 	title 'Logistic Model (Effects Coding) with Total Amount Deposited';
-run;
-*p-value for Analysis of Max Likelihood Estimates coefficient is 0.0004;
-
-/* Ins vs. Checks (Logistic Regression) */
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=checks/clodds=pl;
-	title 'Logistic Model (Effects Coding) with Number of Checks WRITTEN';
-run;
-*p-value for Analysis of Max Likelihood Estimates coefficient is <0.0001;
-
-
-/* Ins vs. Nsfamt (Logistic Regression) */
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=nsfamt/clodds=pl;
-	title 'Logistic Model (Effects Coding) with Nsfamt';
-run;
-/* p-value for Analysis of Max Likelihood Estimates coefficieent is = 0.0001 */
-/* DF = 1 */
-
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=phone/clodds=pl;
-	title 'Logistic Model (Effects Coding) with Phone';
-run;
-
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=savbal/clodds=pl;
-	title 'Logistic Model (Effects Coding) with Savbal';
-run;
-
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=atmamt/clodds=pl;
-	title 'Logistic Model (Effects Coding) with Atmamt';
-run;
-
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=pos/clodds=pl;
-	title 'Logistic Model (Effects Coding) with pos';
-run;
-
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=cdbal/clodds=pl;
-	title 'Logistic Model (Effects Coding) with cdbal';
-run;
-
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=irabal/clodds=pl;
-	title 'Logistic Model (Effects Coding) with irabal';
-run;
-
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=mmbal/clodds=pl;
-	title 'Logistic Model (Effects Coding) with mmbal';
 run;
 
 proc logistic data=hw_data.insurance_t alpha=0.002;
@@ -113,33 +81,8 @@ proc logistic data=hw_data.insurance_t alpha=0.002;
 run;
 
 proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=posamt/clodds=pl;
-	title 'Logistic Model (Effects Coding) with posamt';
-run;
-
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=locbal/clodds=pl;
-	title 'Logistic Model (Effects Coding) with locbal';
-run;
-
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=invbal/clodds=pl;
-	title 'Logistic Model (Effects Coding) with invbal';
-run;
-
-proc logistic data=hw_data.insurance_t alpha=0.002;
 	model ins(event='1')=ilsbal/clodds=pl;
 	title 'Logistic Model (Effects Coding) with ilsbal';
-run;
-
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=mtgbal/clodds=pl;
-	title 'Logistic Model (Effects Coding) with mtgbal';
-run;
-
-proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=ccbal/clodds=pl;
-	title 'Logistic Model (Effects Coding) with ccbal';
 run;
 
 proc logistic data=hw_data.insurance_t alpha=0.002;
@@ -148,19 +91,65 @@ proc logistic data=hw_data.insurance_t alpha=0.002;
 run;
 
 proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=invbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with invbal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=irabal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with irabal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=locbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with locbal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
 	model ins(event='1')=lores/clodds=pl;
 	title 'Logistic Model (Effects Coding) with lores';
 run;
 
 proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=age/clodds=pl;
-	title 'Logistic Model (Effects Coding) with age';
+	model ins(event='1')=mmbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with mmbal';
 run;
 
 proc logistic data=hw_data.insurance_t alpha=0.002;
-	model ins(event='1')=crscore/clodds=pl;
-	title 'Logistic Model (Effects Coding) with crscore';
+	model ins(event='1')=mtgbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with mtgbal';
 run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=nsfamt/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Nsfamt';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=phone/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Phone';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=pos/clodds=pl;
+	title 'Logistic Model (Effects Coding) with pos';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=posamt/clodds=pl;
+	title 'Logistic Model (Effects Coding) with posamt';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=savbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Savbal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=teller/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Teller Visits';
+run;
+
 
 
 /* ************************** */
