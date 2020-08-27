@@ -140,6 +140,75 @@ proc freq data=hw_data.insurance_t;
 run;
 /* income = continuous  */
 
+proc freq data=hw_data.insurance_t;
+	tables ins;
+run;
+/* ins = binary  */
+
+proc freq data=hw_data.insurance_t;
+	tables inv;
+run;
+/* inv = binary  */
+
+proc freq data=hw_data.insurance_t;
+	tables invbal;
+run;
+/* invbal = continuous  */
+
+proc freq data=hw_data.insurance_t;
+	tables ira;
+run;
+/* ira = binary  */
+
+proc freq data=hw_data.insurance_t;
+	tables irabal;
+run;
+/* irabal = continuous  */
+
+proc freq data=hw_data.insurance_t;
+	tables loc;
+run;
+/* loc = binary  */
+
+proc freq data=hw_data.insurance_t;
+	tables locbal;
+run;
+/* locbal = continuous  */
+
+proc freq data=hw_data.insurance_t;
+	tables lores;
+run;
+/* lores = continuous  */
+
+proc freq data=hw_data.insurance_t;
+	tables mm;
+run;
+/* mm = binary  */
+
+proc freq data=hw_data.insurance_t;
+	tables mmbal;
+run;
+/* mmbal = continuous  */
+
+proc freq data=hw_data.insurance_t;
+	tables mmcred;
+run;
+/* mmcred = ordinal  */
+
+proc freq data=hw_data.insurance_t;
+	tables moved;
+run;
+/* moved = binary  */
+
+proc freq data=hw_data.insurance_t;
+	tables mtgbal;
+run;
+/* mtgbal = continuous  */
+
+proc freq data=hw_data.insurance_t;
+	tables mtgbal;
+run;
+/* mtgbal = continuous  */
 
 proc freq data=hw_data.insurance_t;
 	tables nsf;
@@ -152,15 +221,44 @@ run;
 /* nsfamt = continuous */
 
 proc freq data=hw_data.insurance_t;
-	tables mmcred;
+	tables phone;
 run;
-/* mmcred = ordinal */
+/* phone = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables pos;
+run;
+/* pos = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables posamt;
+run;
+/* posamt = continuous */
 
 proc freq data=hw_data.insurance_t;
 	tables res;
 run;
 /* res = nominal */
 
+proc freq data=hw_data.insurance_t;
+	tables sav;
+run;
+/* sav = binary */
+
+proc freq data=hw_data.insurance_t;
+	tables savbal;
+run;
+/* savbal = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables sdb;
+run;
+/* sdb = binary */
+
+proc freq data=hw_data.insurance_t;
+	tables teller;
+run;
+/* teller = continuous */
 
 
 /************************************************************/
