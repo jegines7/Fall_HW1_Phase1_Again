@@ -1,0 +1,1568 @@
+/************************************************************/
+*Determining variable types (Arranged in Alphabetical Order);
+/************************************************************/
+proc freq data=hw_data.insurance_t;
+	tables acctage;
+run;
+/* acctage = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables age;
+run;
+/* age = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables atm;
+run;
+/* atm = binary */
+
+proc freq data=hw_data.insurance_t;
+	tables atmamt;
+run;
+/* atmamt = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables branch;
+run;
+/* branch = nominal  */
+
+proc freq data=hw_data.insurance_t;
+	tables cashbk;
+run;
+/* cashbk = ordinal  */
+
+proc freq data=hw_data.insurance_t;
+	tables cc;
+run;
+/*cc = binary */
+
+proc freq data=hw_data.insurance_t;
+	tables ccbal;
+run;
+/*ccbal = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables ccpurc;
+run;
+/*ccpurc = nominal */
+
+
+proc freq data=hw_data.insurance_t;
+	tables dda;
+run;
+/* dda = binary */
+
+proc freq data=hw_data.insurance_t;
+	tables ddabal;
+run;
+/* ddabal = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables dep;
+run;
+/* dep = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables depamt;
+run;
+/* depamt = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables checks;
+run;
+/* checks = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables dirdep;
+run;
+/* dirdep = binary */
+
+proc freq data=hw_data.insurance_t;
+	tables nsf;
+run;
+/* nsf = binary  */
+
+proc freq data=hw_data.insurance_t;
+	tables nsfamt;
+run;
+/* nsfamt = continuous */
+
+proc freq data=hw_data.insurance_t;
+	tables mmcred;
+run;
+/* mmcred = ordinal */
+
+proc freq data=hw_data.insurance_t;
+	tables res;
+run;
+/* res = nominal */
+
+
+/* Maybe show extended p-value in appendix? */
+
+/* ************************** */
+/* Logistic Regressions */
+/* ************************** */
+
+/* Ins vs. Acctage (logistic regression) */
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=acctage/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Age of Oldest Account';
+run;
+*p-value for Analysis of Max Likelihood Estimates coefficient is 0.0079;
+
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=age/clodds=pl;
+	title 'Logistic Model (Effects Coding) with age';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=atmamt/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Atmamt';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=ccbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with ccbal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=cdbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with cdbal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=checks/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Number of Checks WRITTEN';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=crscore/clodds=pl;
+	title 'Logistic Model (Effects Coding) with crscore';
+run;
+
+ods output parameterestimates=ddabal;
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=ddabal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Checking Account Balance';
+run;
+
+ods output parameterestimates=dep;
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=dep/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Checking Deposits';
+run;
+
+data dep1;
+	set dep;
+	format probchisq dollar30.29;
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002 outest=ins_depamt_reg;
+	model ins(event='1')=depamt/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Total Amount Deposited';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=hmval/clodds=pl;
+	title 'Logistic Model (Effects Coding) with hmval';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=ilsbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with ilsbal';
+run;
+
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=income/clodds=pl;
+	title 'Logistic Model (Effects Coding) with income';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=invbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with invbal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=irabal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with irabal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=locbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with locbal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=lores/clodds=pl;
+	title 'Logistic Model (Effects Coding) with lores';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=mmbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with mmbal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=mtgbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with mtgbal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=nsfamt/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Nsfamt';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=phone/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Phone';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=pos/clodds=pl;
+	title 'Logistic Model (Effects Coding) with pos';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=posamt/clodds=pl;
+	title 'Logistic Model (Effects Coding) with posamt';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=savbal/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Savbal';
+run;
+
+proc logistic data=hw_data.insurance_t alpha=0.002;
+	model ins(event='1')=teller/clodds=pl;
+	title 'Logistic Model (Effects Coding) with Teller Visits';
+run;
+
+/* ************************** */
+/* Chi Square Tests  of Association*/
+/* ************************** */
+
+proc freq data=hw_data.insurance_t;
+	tables atm*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. ATM";
+run;
+
+/* *Need full p-value for this one */
+proc freq data=hw_data.insurance_t;
+	tables branch*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	output out=branch chisq;
+	title "Test of Assoc., Ins. vs. branch";
+run;
+
+data branch1;
+	set branch;
+	format p_lrchi dollar30.29;
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables cashbk*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. Cashbk";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables cc*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. cc";
+run;
+
+/* need full p-value */
+proc freq data=hw_data.insurance_t;
+	tables ccpurc*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	output out=ccpurc chisq;
+	title "Test of Assoc., Ins. vs. ccpurc";
+run;
+
+data ccpurc1;
+	set ccpurc;
+	format p_lrchi dollar30.29;
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables cd*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. cd";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables dda*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. DDA";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables dirdep*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. Dirdep";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables hmown*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. hmown";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables ils*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. ils";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables inarea*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. inarea";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables inv*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. inv";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables ira*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. ira";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables loc*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. loc";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables mm*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. mm";
+run;
+
+/* *Need full p-value for this one */
+proc freq data=hw_data.insurance_t;
+	tables mmcred*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	output out=mmcred chisq;
+	title "Test of Assoc., Ins. vs. mmcred";
+run;
+
+data mmcred1;
+	set mmcred;
+	format p_mhchi dollar30.29;
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables moved*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. moved";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables mtg*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. mtg";
+run;
+
+
+proc freq data=hw_data.insurance_t;
+	tables nsf* ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. Nsf.";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables res*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. branch";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables sav*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. sav";
+run;
+
+proc freq data=hw_data.insurance_t;
+	tables sdb*ins/chisq expected cellchi2 nocol nopercent relrisk;
+	title "Test of Assoc., Ins. vs. sdb";
+run;
+
+libname logreg "/opt/sas/home/jegines/sasuser.viya/Logisitic Regression";
+
+proc freq data=logreg.insurance_t;
+run;
+/************************************************************************************/
+*This step done for all continuous variables to assess their relationship with the insurance product purchase target vairable;
+
+proc logistic data=logreg.insurance_t alpha=.002;
+model ins(event='1')=hmval /clodds=pl;
+title 'Logistic Model ';
+run;
+proc logistic data=logreg.insurance_t alpha=.002;
+model ins(event='1')=age /clodds=pl;
+title 'Logistic Model ';
+run;
+
+proc logistic data=logreg.insurance_t alpha=.002;
+model ins(event='1')=crscore /clodds=pl;
+title 'Logistic Model ';
+run;
+/********************************************************************************/
+/* Chi-Square Test for binary variables */
+proc freq data=logreg.insurance_t;
+    tables (moved)*ins
+          / chisq expected cellchi2 nocol nopercent
+            relrisk;
+run;
+/*****************************************************************************/
+/* Detecting Ordinal Associations for small samples when Chi Square assumptions are not met */
+proc freq data=logreg.insurance_t;
+    tables (cashbk mmcred)*ins / fisher;
+    title 'Ordinal Association?';
+run;
+/****************************************************************************/
+/* Chi-Square Test for binary variables */
+proc freq data=logreg.insurance_t;
+	tables ins*(moved inarea branch res)/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR DDA */
+
+proc freq data=LRHW1.insurance_t;
+	tables ins*dda/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR MOVED */
+proc freq data=LRHW1.insurance_t;
+	tables ins*MOVED/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR INV */
+proc freq data=LRHW1.insurance_t;
+	tables ins*INV/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR MTG */
+proc freq data=LRHW1.insurance_t;
+	tables ins*MTG/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR ILS */
+proc freq data=LRHW1.insurance_t;
+	tables ins*ILS/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR IRA */
+proc freq data=LRHW1.insurance_t;
+	tables ins*IRA/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR LOC */
+proc freq data=LRHW1.insurance_t;
+	tables ins*LOC/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR NSF */
+proc freq data=LRHW1.insurance_t;
+	tables ins*NSF/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR SDB */
+proc freq data=LRHW1.insurance_t;
+	tables ins*SDB/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR MM */
+proc freq data=LRHW1.insurance_t;
+	tables MM*INS/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR CD */
+proc freq data=LRHW1.insurance_t;
+	tables ins*CD/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR DIRDEP */
+proc freq data=LRHW1.insurance_t;
+	tables ins*DIRDEP/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR SAV */
+proc freq data=LRHW1.insurance_t;
+	tables ins*SAV/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR CC */
+proc freq data=LRHW1.insurance_t;
+	tables ins*CC/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR HMOWN */
+proc freq data=LRHW1.insurance_t;
+	tables ins*HMOWN/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR ATM */
+proc freq data=LRHW1.insurance_t;
+	tables ins*ATM/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/**************************************************************************/
+/* ODDS RATIOS FOR INAREA */
+proc freq data=LRHW1.insurance_t;
+	tables ins*INAREA/chisq expected cellchi2 nocol nopercent relrisk;
+	title "MH Chi Square Test, Ins. vs. DDA";
+run;
+
+/*********************************************************/ 
+/* Testing Continuous Variables for Linearity Assumption */
+/*                                                       */
+/*********************************************************/ 
+
+/*****************************/ 
+/* Exploratory Data Analysis */
+/*****************************/ 
+
+
+/* check for 0's and negative numbers in continuous vars to account for any potential issues */
+/* within a Box-Tidwell Transformation and found that all have this issue except for ACCTAGE */
+/* but it does have 546 missing vals that could potentially be new ones? */
+proc univariate data=lrhw1.insurance_t;
+	var acctage;
+	hist;
+run;
+
+*explore acctage further where acctage is missing so that I can see if 
+new accounts represent missing data so a value of 0 would make sense;
+data age_check;
+	set lrhw1.insurance_t;
+	if acctage = '.';
+run;
+
+*check further for frequencies of these operations compared to normal data;
+proc means data=age_check;
+	var age crscore dep dda ddabal;
+run;
+
+*normal data check reveals that these values all seem about the same so no trend could really be 
+established that would make assuming missingness is a new account;
+proc means data=lrhw1.insurance_t;
+	var age crscore dep dda ddabal;
+	title "Normal Data's Means Across Several Variables"; 
+run;
+
+*All seems normal so finally going to use indicator variable to test if significant inside of 
+proc logistic model and if it's giving any value anywhere else before just imputing with median perhaps;
+data age_check_log;
+	set lrhw1.insurance_t;
+	if acctage = '.' then missing_acct_age = 1;
+	else missing_acct_age = 0;
+run;
+
+*verify it did it correctly still;
+proc freq data = age_check_log;
+	tables missing_acct_age;
+run;
+
+*check if this missing data contains any dependence on target var;
+proc logistic data = age_check_log;
+	class missing_acct_age(ref = '0') / param=ref;
+	model ins(event='1') = missing_acct_age;
+	title 'Testing for Missingness being a significant indicator on Predictor Var'; 
+run;
+
+/* doesn't return it as a significant variable to the target so check for dependence with other predictors */
+
+*check for dependence on a few random predictor variables;
+proc logistic data=age_check_log;
+	 class ira sav ils;
+	model missing_acct_age(event='1') = crscore age ddabal ira sav ils;
+run;
+
+*doesn't show significant p vals for any of these randomly chosen variables except ira curiously so going to explore that;
+proc means data = age_check_log;
+	class missing_acct_age;
+	var ira;
+run;
+*mean of .05~ for nonmissing and .08 for missing shows potential for relationship here but not super sure then
+might need to run another test to see if that is significant or not;
+proc logistic data=age_check_log;
+	 class ira;
+	model missing_acct_age(event='1') = ira;
+run;
+
+*by itself it's right on the line for significant at =.0021 so giong to reject dependence on 
+other predictor variables for now too and assume rare event aspect of IRA was part of issue
+*for now consider imputing with median in the future to deal with missing values and do it now to make BT work; 
+proc means data=lrhw1.insurance_t median mean;
+	var acctage;
+run;
+*median is 4 and mean is 6.03;
+
+*impute acctage missing values with median val for acctage;
+data med_imp_acctage;
+	set lrhw1.insurance_t;
+	if acctage  = '.' then acctage = 4;
+run;
+
+*check that it worked;
+proc freq data= med_imp_acctage;
+	tables acctage;
+run;
+
+/*****************/ 
+/* ACCTAGE Tests */
+/*****************/ 
+
+*create acctage_log of the Box Tidwell Transformation now to check for linearity in acctage;
+data med_imp_acctage;
+	set med_imp_acctage;
+	acctage_log = acctage*log(acctage);
+run;
+
+*run BT Transformation now for acctage and acctage_log;
+proc logistic data=med_imp_acctage plots(only)=(oddsratio);
+	model ins(event='1') = acctage acctage_log/ clodds=pl clparm=pl;
+run;
+quit;
+
+*run BT Transformation now for acctage and find that y hat ~= 3;
+proc logistic data=med_imp_acctage plots(only)=(oddsratio);
+	model ins(event='1') = acctage/ clodds=pl clparm=pl;
+run;
+quit;
+
+*run proc gam to check for agreement on acctage;
+proc gam data=med_imp_acctage plots = components(clm commonaxes);
+	model ins(event = '1') = spline(acctage, df=4) / dist=binomial link = logit;
+run;
+quit;
+
+/****************/ 
+/* DDABAL Tests */
+/****************/ 
+
+*run proc gam bc of zeros in ddabal so I need to test in GAM preferably but it doesnt accurately converge;
+proc gam data=lrhw1.insurance_t plots = components(clm commonaxes);
+	model ins(event='1') = spline(ddabal, df=4) / dist = binomial link = logit;
+run;
+quit;
+
+*Transformation on ddabal variable to account for nonconvergence in GAM model
+ and create neg_dda indicator variable that the data was negative before being
+ transformed to equal 1 to make BT work;
+data insurance_t;
+	set lrhw1.insurance_t;
+	if ddabal < 0 then neg_dda = 1;
+	else neg_dda = 0;
+	ddabal1 = (1 + (ddabal));
+	if ddabal1 < 1 then ddabal1 =1;
+	ddalogdda = ddabal1*log(ddabal1);
+run;
+
+*box tidwell transformation for ddabal;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = ddabal ddalogdda/ clodds=pl clparm=pl;
+	title "Modeling DDABal BT Transformation";
+run;
+quit;
+
+*check original param estimates to find that y hat = 0.62 ;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = ddabal / clodds=pl clparm=pl;
+	title 'Modeling DDABal by Itself';
+run;
+quit;
+
+
+/****************/ 
+/*   DEP Tests  */
+/****************/ 
+*run proc gam bc of zero's in dep that I need to test but does converge and say that it is not correct currently
+ looks to me like it should be a square according to this plot, but I'm more thinking that this variable might need
+to be binned so that it can become categorical instead of continuous;
+proc gam data=lrhw1.insurance_t plots = components(clm commonaxes);
+	model ins(event='1') = spline(dep, df=4) / dist = binomial link = logit;
+run;
+quit;
+
+*check dep with BT after data transformation to see if proc eyball was right on squaring it technically;
+data insurance_t;
+	set lrhw1.insurance_t;
+	dep1 = (1 + (dep));
+	deplog = dep1*log(dep1);
+run;
+
+*box tidwell transformation for dep;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = dep deplog/ clodds=pl clparm=pl;
+	title 'Modeling Dep BT Transformation';
+run;
+quit;
+
+*check original param estimates to find that y hat = -.24;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = dep / clodds=pl clparm=pl;
+	title 'Modeling Dep by Itself';
+run;
+quit;
+
+/****************/ 
+/* DEPAMT Tests */
+/****************/ 
+*run proc gam bc of zero's in depamt that I need to test but doesn't accurately converge;
+proc gam data=lrhw1.insurance_t plots = components(clm commonaxes);
+	model ins(event='1') = spline(depamt, df=4) / dist = binomial link = logit;
+run;
+quit;
+
+
+*Transformation on depamt variable to account for nonconvergence in GAM model;
+data insurance_t;
+	set lrhw1.insurance_t;
+	depamt1 = (1 + (depamt));
+	depamtlog = depamt1*log(depamt1);
+run;
+
+*box tidwell transformation for depamt, found to be insignificant;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = depamt depamtlog/ clodds=pl clparm=pl;
+	title 'Modeling depamt BT Transformation';
+run;
+quit;
+
+/****************/ 
+/* CHECKS Tests */
+/****************/ 
+*run proc gam bc of zero's in checks and find that is significant;
+proc gam data=lrhw1.insurance_t plots = components(clm commonaxes);
+	model ins(event='1') = spline(checks, df=4) / dist = binomial link = logit;
+run;
+quit;
+
+*check checks with BT after data transformation to see if proc eyball was right on squaring it technically;
+data insurance_t;
+	set lrhw1.insurance_t;
+	checks1 = (1 + (checks));
+	checkslog = checks1*log(checks1);
+run;
+
+*box tidwell transformation for checks;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = checks checkslog/ clodds=pl clparm=pl;
+	title 'Modeling checks BT Transformation';
+run;
+quit;
+
+*check original param estimates to find that y hat = -.34;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = checks / clodds=pl clparm=pl;
+	title 'Modeling checks by Itself';
+run;
+quit;
+
+/****************/ 
+/* NSFAMT Tests */
+/****************/ 
+*run proc gam bc of zero's in nsfamt and find that is significant;
+proc gam data=lrhw1.insurance_t plots = components(clm commonaxes);
+	model ins(event='1') = spline(nsfamt, df=4) / dist = binomial link = logit;
+run;
+quit;
+
+*check nsfamt with BT after data transformation to see if proc eyball was right on squaring it technically;
+data insurance_t;
+	set lrhw1.insurance_t;
+	nsfamt1 = (1 + (nsfamt));
+	nsfamtlog = nsfamt1*log(nsfamt1);
+run;
+
+*box tidwell transformation for nsfamt;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = nsfamt nsfamtlog/ clodds=pl clparm=pl;
+	title 'Modeling nsfamt BT Transformation';
+run;
+quit;
+
+*check original param estimates to find that y hat = .86;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = nsfamt / clodds=pl clparm=pl;
+	title 'Modeling nsfamt by Itself';
+run;
+quit;
+
+/****************/ 
+/* PHONE Tests */
+/****************/ 
+*run proc gam bc of zero's in phone and find that is significant & looks like square transformation maybe;
+proc gam data=lrhw1.insurance_t plots = components(clm commonaxes);
+	model ins(event='1') = spline(phone, df=4) / dist = binomial link = logit;
+run;
+quit;
+
+*check phone with BT after data transformation to see if proc eyball was right on squaring it technically;
+data insurance_t;
+	set lrhw1.insurance_t;
+	phone1 = (1 + (phone));
+	phonelog = phone1*log(phone1);
+run;
+
+*box tidwell transformation for phone;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = phone phonelog/ clodds=pl clparm=pl;
+	title 'Modeling phone BT Transformation';
+run;
+quit;
+
+*check original param estimates to find that y hat = -.028;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = phone / clodds=pl clparm=pl;
+	title 'Modeling phone by Itself';
+run;
+quit;
+
+/****************/ 
+/* TELLER Tests */
+/****************/ 
+*run proc gam bc of zero's in teller and find that is significant barely and looks like cubed;
+proc gam data=lrhw1.insurance_t plots = components(clm commonaxes);
+	model ins(event='1') = spline(teller, df=4) / dist = binomial link = logit;
+run;
+quit;
+
+*check teller with BT after data transformation to see if proc eyball was right on squaring it technically;
+data insurance_t;
+	set lrhw1.insurance_t;
+	teller1 = (1 + (teller));
+	tellerlog = teller1*log(teller1);
+run;
+
+*box tidwell transformation for teller;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = teller tellerlog/ clodds=pl clparm=pl;
+	title 'Modeling teller BT Transformation';
+run;
+quit;
+
+*check original param estimates to find that y hat = 3.47 but not sig w a p val = .10
+ most likely here we will still reject the linearity here and at least explore raising 
+ teller to the cubic or squared power since GAM is using untransformed data;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = teller / clodds=pl clparm=pl;
+	title 'Modeling teller by Itself';
+run;
+quit;
+
+/****************/ 
+/* SAVBAL Tests */
+/****************/ 
+*run proc gam bc of zero's in savbal and find that is not able to converge;
+proc gam data=lrhw1.insurance_t plots = components(clm commonaxes);
+	model ins(event='1') = spline(savbal, df=4) / dist = binomial link = logit;
+run;
+quit;
+
+*check savbal with BT after data transformation after no convergence;
+data insurance_t;
+	set lrhw1.insurance_t;
+	savbal1 = (1 + (savbal));
+	savballog = savbal1*log(savbal1);
+run;
+
+*box tidwell transformation for savbal;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = savbal savballog/ clodds=pl clparm=pl;
+	title 'Modeling savbal BT Transformation';
+run;
+quit;
+
+*check original param estimates to find that y hat = .123 and sig w a p val <.0001;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = savbal / clodds=pl clparm=pl;
+	title 'Modeling savbal by Itself';
+run;
+quit;
+
+/****************/ 
+/* ATMAMT Tests */
+/****************/ 
+*run proc gam bc of zero's in atmamt and find that there is no convergence;
+proc gam data=lrhw1.insurance_t plots = components(clm commonaxes);
+	model ins(event='1') = spline(atmamt, df=4) / dist = binomial link = logit;
+run;
+quit;
+
+*check atmamt with BT after data transformation to see if proc eyball was right on squaring it technically;
+data insurance_t;
+	set lrhw1.insurance_t;
+	atmamt1 = (1 + (atmamt));
+	atmamtlog = atmamt1*log(atmamt1);
+run;
+
+*box tidwell transformation for atmamt shows that it is not signficant;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = atmamt atmamtlog/ clodds=pl clparm=pl;
+	title 'Modeling atmamt BT Transformation';
+run;
+quit;
+
+/*************/ 
+/* POS Tests */
+/*************/ 
+*run proc gam bc of zero's in pos and find that is significant and looks like squared w one inflection point;
+proc gam data=lrhw1.insurance_t plots = components(clm commonaxes);
+	model ins(event='1') = spline(pos, df=4) / dist = binomial link = logit;
+run;
+quit;
+
+*check pos with BT after data transformation to see if proc eyball was right on squaring it technically;
+data insurance_t;
+	set lrhw1.insurance_t;
+	pos1 = (1 + (pos));
+	poslog = pos1*log(pos1);
+run;
+
+*box tidwell transformation for pos;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = pos poslog/ clodds=pl clparm=pl;
+	title 'Modeling pos BT Transformation';
+run;
+quit;
+
+*check original param estimates to find that y hat = -1.3 and sig w a p val <.0001;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = pos / clodds=pl clparm=pl;
+	title 'Modeling pos by Itself';
+run;
+quit;
+
+/****************/ 
+/* POSAMT Tests */
+/****************/ 
+*run proc gam bc of zero's in posamt and find that is significant and looks like squared w one inflection point;
+proc gam data=lrhw1.insurance_t plots = components(clm commonaxes);
+	model ins(event='1') = spline(posamt, df=4) / dist = binomial link = logit;
+run;
+quit;
+
+*check posamt with BT after data transformation to see if proc eyball was right on squaring it technically;
+data insurance_t;
+	set lrhw1.insurance_t;
+	posamt1 = (1 + (posamt));
+	posamtlog = posamt1*log(posamt1);
+run;
+
+*box tidwell transformation for posamt;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = posamt posamtlog/ clodds=pl clparm=pl;
+	title 'Modeling posamt BT Transformation';
+run;
+quit;
+
+*check original param estimates to find that y hat = -6.75 and sig w a p val <.0001;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = posamt / clodds=pl clparm=pl;
+	title 'Modeling posamt by Itself';
+run;
+quit;
+
+/****************/ 
+/* CDBAL Tests */
+/****************/ 
+*run proc gam bc of zero's in cdbal and find no convergence;
+proc gam data=lrhw1.insurance_t plots = components(clm commonaxes);
+	model ins(event='1') = spline(cdbal, df=4) / dist = binomial link = logit;
+run;
+quit;
+
+*check cdbal with BT after data transformation since no convergence;
+data insurance_t;
+	set lrhw1.insurance_t;
+	cdbal1 = (1 + (cdbal));
+	cdballog = cdbal1*log(cdbal1);
+run;
+
+*box tidwell transformation for cdbal;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = cdbal cdballog/ clodds=pl clparm=pl;
+	title 'Modeling cdbal BT Transformation';
+run;
+quit;
+
+*check original param estimates to find that y hat = .58 and sig w a p val <.0001;
+proc logistic data=insurance_t plots(only)=(oddsratio);
+	model ins(event='1') = cdbal / clodds=pl clparm=pl;
+	title 'Modeling cdbal by Itself';
+run;
+quit;
+
+Objective: determine if the continuous variables 
+	for the insurance_t dataset meet the requirments for 
+	linearity as a predictor of variable INS (INS describes if a subject 
+	purchased an insurance product).
+Method: generalized additive model and Box-Tidwell
+transformations were used to determine if a non-linear, or exponential 
+model would be a better fit for variable respectivly*/
+
+/*Continuous variables to test:
+ IRABAL LOCBAL INVBAL ILSBAL MMBAL
+ MTGBAL CCBAL CCPURC INCOME LORES 
+ HMVAL AGE CRSCORE */
+
+
+/* creates a data set with transformed variables x * log(x) 
+that can be used in the Box-Tidwell test. Also, transforms 
+any continuous data that contains 0 so that the the 
+Box-Tidwell test can be performed.
+*/
+
+data cont_vars;
+	set dt.insurance_t;
+	
+	CCBAL_adj = CCBAL + 1904; *transformed data based on lowest negative CCBAL;
+	CCBAL_adj_log_CCBAL_adj = CCBAL_adj * log(CCBAL_adj);
+		
+	IRABALt = IRABAL + 1; *transformed data;
+	IRABAL_log_IRABAL = IRABALt * log(IRABALt);
+
+	LOCBALt = LOCBAL+1; *transformed data;
+	LOCBAL_log_LOCBAL = LOCBALt * log(LOCBALt);
+	
+	INVBALt = INVBAL+1; *transformed data;
+	INVBAL_log_INVBAL = INVBALt * log(INVBALt);
+	
+	ILSBALt = ILSBAL+1; *transformed data;
+	ILSBAL_log_ILSBAL = ILSBALt * log(ILSBALt);
+	
+	MMBALt = MMBAL+1; *transformed data;
+	MMBAL_log_MMBAL = MMBALt * log(MMBALt);
+	
+	MTGBALt = MTGBAL+1; *transformed data;
+	MTGBAL_log_MTGBAL = MTGBALt * log(MTGBALt);
+	
+	CCBAL_pos_log_CCBAL_pos = CCBAL_pos * log(CCBAL_pos);
+	
+	CCBAL_neg_log_CCBAL_neg = CCBAL_pos * log(CCBAL_neg);
+	
+	INCOMEt = INCOME+1; *transformed data;
+	INCOME_log_INCOME = INCOMEt * log(INCOMEt);
+	
+	LORES_log_LORES = LORES * log(LORES);
+	
+	
+	HMVAL_log_HMVAL = HMVAL * log(HMVAL);
+	
+	AGE_log_AGE = AGE * log(AGE);
+	
+	CRSCORE_log_CRSCORE = CRSCORE * log(CRSCORE);
+	
+run;
+
+/*_________________________________________________________________________*/
+/* investigation into variable frequency, p-value of box-tidwell
+transformation, and p-value for GAM model of variable: IRABAL
+/*_________________________________________________________________________*/
+
+proc freq data=dt.insurance_t;
+	where IRABAL <= 0; 
+	table IRABAL / plots=freqplot;
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = IRABAL IRABAL_log_IRABAL / clodds=pl clparm=pl;
+	title 'IRABAL';
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = IRABAL / clodds=pl clparm=pl;
+	title 'IRABAL';
+run;
+
+proc gam data=dt.insurance_t
+	plots = components(clm commonaxes);
+	model INS(event='1') = spline(IRABAL, df=4)
+	/ dist = binomial link = logit;
+run;
+/*_________________________________________________________________________*/
+/* investigation into variable frequency, p-value of box-tidwell
+transformation, and p-value for GAM model of variable: LOCBAL
+/*_________________________________________________________________________*/
+
+
+proc freq data=dt.insurance_t;
+	where LOCBAL = 0; 
+	table LOCBAL / plots=freqplot;
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = LOCBAL LOCBAL_log_LOCBAL / clodds=pl clparm=pl;
+	title 'LOCBAL';
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = LOCBAL / clodds=pl clparm=pl;
+	title 'LOCBAL';
+run;
+
+proc gam data=dt.insurance_t
+	plots = components(clm commonaxes);
+	model INS(event='1') = spline(LOCBAL, df=4)
+	/ dist = binomial link = logit;
+run;
+/*_________________________________________________________________________*/
+/* investigation into variable frequency, p-value of box-tidwell
+transformation, and p-value for GAM model of variable: INVBAL
+/*_________________________________________________________________________*/
+
+proc freq data=dt.insurance_t;
+	where INVBAL <= 0; 
+	table INVBAL / plots=freqplot;
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = INVBAL INVBAL_log_INVBAL / clodds=pl clparm=pl;
+	title 'INVBAL';
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = INVBAL / clodds=pl clparm=pl;
+	title 'INVBAL';
+run;
+
+proc gam data=dt.insurance_t
+	plots = components(clm commonaxes);
+	model INS(event='1') = spline(INVBAL, df=4)
+	/ dist = binomial link = logit;
+run;
+/*_________________________________________________________________________*/
+/* investigation into variable frequency, p-value of box-tidwell
+transformation, and p-value for GAM model of variable: ILSBAL
+/*_________________________________________________________________________*/
+
+proc freq data=dt.insurance_t;
+	where ILSBAL = 0; 
+	table ILSBAL / plots=freqplot;
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = ILSBAL ILSBAL_log_ILSBAL / clodds=pl clparm=pl;
+	title 'ILSBAL';
+run;
+
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = ILSBAL / clodds=pl clparm=pl;
+	title 'ILSBAL';
+run;
+
+proc gam data=dt.insurance_t
+	plots = components(clm commonaxes);
+	model INS(event='1') = spline(ILSBAL, df=4)
+	/ dist = binomial link = logit;
+run;
+/*_________________________________________________________________________*/
+/* investigation into variable frequency, p-value of box-tidwell
+transformation, and p-value for GAM model of variable: MMBAL
+/*_________________________________________________________________________*/
+
+
+proc freq data=dt.insurance_t;
+	where MMBAL = 0; 
+	table MMBAL / plots=freqplot;
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = MMBAL MMBAL_log_MMBAL / clodds=pl clparm=pl;
+	title 'MMBAL';
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = MMBAL / clodds=pl clparm=pl;
+	title 'MMBAL';
+run;
+
+proc gam data=dt.insurance_t
+	plots = components(clm commonaxes);
+	model INS(event='1') = spline(MMBAL, df=4)
+	/ dist = binomial link = logit;
+run;
+
+/*_________________________________________________________________________*/
+/* investigation into variable frequency, p-value of box-tidwell
+transformation, and p-value for GAM model of variable: MTGBAL
+/*_________________________________________________________________________*/
+
+proc freq data=dt.insurance_t;
+	where MTGBAL <= 0; 
+	table MTGBAL / plots=freqplot;
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = MTGBAL MTGBAL_log_MTGBAL / clodds=pl clparm=pl;
+	title 'MTGBAL';
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = MTGBAL / clodds=pl clparm=pl;
+	title 'MTGBAL';
+run;
+
+proc gam data=dt.insurance_t
+	plots = components(clm commonaxes);
+	model INS(event='1') = spline(MTGBAL, df=4)
+	/ dist = binomial link = logit;
+run;
+
+/*_________________________________________________________________________*/
+/* investigation into variable frequency, p-value of box-tidwell
+transformation, and p-value for GAM model of variable: CCBAL
+/*_________________________________________________________________________*/
+
+proc freq data=work.cont_vars; /*1904 is now 0 after adjustment*/
+	table CCBAL_adj / plots=freqplot;
+run;
+
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = CCBAL_adj CCBAL_adj_log_CCBAL_adj / clodds=pl clparm=pl;
+	title 'CCBAL';
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = CCBAL_adj  / clodds=pl clparm=pl;
+	title 'CCBAL';
+run;
+
+proc gam data=dt.insurance_t
+	plots = components(clm commonaxes);
+	model INS(event='1') = spline(CCBAL, df=4)
+	/ dist = binomial link = logit;
+run;
+/*_________________________________________________________________________*/
+/* investigation into variable frequency, p-value of box-tidwell
+transformation, and p-value for GAM model of variable: LORES
+/*_________________________________________________________________________*/
+
+proc freq data=dt.insurance_t;
+	where LORES <= 0; 
+	table LORES / plots=freqplot;
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = LORES LORES_log_LORES / clodds=pl clparm=pl;
+	title 'LORES';
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = LORES / clodds=pl clparm=pl;
+	title 'LORES';
+run;
+
+proc gam data=dt.insurance_t
+	plots = components(clm commonaxes);
+	model INS(event='1') = spline(LORES, df=4)
+	/ dist = binomial link = logit;
+run;
+/*_________________________________________________________________________*/
+/* investigation into variable frequency, p-value of box-tidwell
+transformation, and p-value for GAM model of variable: INCOME
+/*_________________________________________________________________________*/
+
+
+proc freq data=dt.insurance_t;
+	where INCOME <= 0; 
+	table INCOME / plots=freqplot;
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = INCOME INCOME_log_INCOME / clodds=pl clparm=pl;
+	title 'INCOME';
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = INCOME / clodds=pl clparm=pl;
+	title 'INCOME';
+run;
+
+proc gam data=dt.insurance_t
+	plots = components(clm commonaxes);
+	model INS(event='1') = spline(INCOME, df=4)
+	/ dist = binomial link = logit;
+run;
+
+/*_________________________________________________________________________*/
+/* investigation into variable frequency, p-value of box-tidwell
+transformation, and p-value for GAM model of variable: HMVAL
+/*_________________________________________________________________________*/
+
+
+proc freq data=dt.insurance_t;
+	where HMVAL <= 0; 
+	table HMVAL / plots=freqplot;
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = HMVAL HMVAL_log_HMVAL / clodds=pl clparm=pl;
+	title 'HMVAL';
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = HMVAL / clodds=pl clparm=pl;
+	title 'HMVAL';
+run;
+
+proc gam data=dt.insurance_t
+	plots = components(clm commonaxes);
+	model INS(event='1') = spline(HMVAL, df=4)
+	/ dist = binomial link = logit;
+run;
+/*_________________________________________________________________________*/
+/* investigation into variable frequency, p-value of box-tidwell
+transformation, and p-value for GAM model of variable: AGE
+/*_________________________________________________________________________*/
+
+proc freq data=dt.insurance_t;
+	where AGE <= 0; 
+	table AGE / plots=freqplot;
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = AGE AGE_log_AGE / clodds=pl clparm=pl;
+	title 'AGE';
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = AGE / clodds=pl clparm=pl;
+	title 'AGE';
+run;
+
+proc gam data=dt.insurance_t
+	plots = components(clm commonaxes);
+	model INS(event='1') = spline(AGE, df=4)
+	/ dist = binomial link = logit;
+run;
+/*_________________________________________________________________________*/
+/* investigation into variable frequency, p-value of box-tidwell
+transformation, and p-value for GAM model of variable: CRSCORE
+/*_________________________________________________________________________*/
+
+proc freq data=dt.insurance_t;
+	where CRSCORE <= 0; 
+	table CRSCORE / plots=freqplot;
+run;
+/************************************************************/
+*Exploring Potential Redundancies;
+/************************************************************/
+
+/* ATM, ATMAMT */
+proc reg data=hw_data.insurance_t;
+	model ins= atm atmamt/vif collin collinoint;
+run;
+quit; 
+/* VIF < 2 */
+/* Collin/collinoint okay too */
+
+/* CC, CCBAL, CCPURC */
+proc reg data=hw_data.insurance_t;
+	model ins= cc ccbal ccpurc/vif collin collinoint;
+run;
+quit; 
+/* VIF < 2 */
+/* Collin/collinoint okay too */
+
+/* CD, CDBAL */
+proc reg data=hw_data.insurance_t;
+	model ins= cd cdbal/vif collin collinoint;
+run;
+quit; 
+/* VIF < 2 */
+/* Collin/collinoint okay too */
+
+/* DDA, DDABAL */
+proc reg data=hw_data.insurance_t;
+	model ins= dda ddabal/vif collin collinoint;
+run;
+quit; 
+/* VIF < 2 */
+/* Collin/collinoint okay too */
+
+/* LOC, LOCBAL */
+proc reg data=hw_data.insurance_t;
+	model ins= loc locbal/vif collin collinoint;
+run;
+quit; 
+/* VIF < 2 */
+/* Collin/collinoint okay too */
+
+/* INV, INVBAL */
+proc reg data=hw_data.insurance_t;
+	model ins= inv invbal/vif collin collinoint;
+run;
+quit; 
+/* VIF < 2 */
+/* Collin/collinoint okay too */
+
+/**********HIGHLY CORRELATED**********/
+/* ILS, ILSBAL */
+proc reg data=hw_data.insurance_t;
+	model ins= ils ilsbal/vif collin collinoint;
+run;
+quit; 
+/* VIF = 37 */
+/****************************************/
+
+/* IRA, IRABAL  */
+proc reg data=hw_data.insurance_t;
+	model ins= ira irabal/vif collin collinoint;
+run;
+quit;
+/* VIF < 2 */
+
+/* LOC, LOCBAL */
+proc reg data=hw_data.insurance_t;
+	model ins= loc locbal/vif collin collinoint;
+run;
+quit;
+/* VIF < 2 */
+
+/**********POSSIBLY CORRELATED**********/
+
+/* MM, MMBAL, MMCRED */
+proc reg data=hw_data.insurance_t;
+	model ins= mm mmbal mmcred/vif collin collinoint;
+run;
+quit;
+/* VIF = 8, 7 */
+
+/* Attempting to center mm */
+proc stdize data=hw_data.insurance_t method=mean	
+	out=insurance_t_center(rename=(mm=mm_center));
+	var mm;
+run;
+/* nothing changed */
+
+/* MM, MMBAL */
+proc reg data=hw_data.insurance_t;
+	model ins= mm mmbal/vif collin collinoint;
+run;
+quit;
+/* VIF still high */
+
+/* MM, MMCRED */
+proc reg data=hw_data.insurance_t;
+	model ins= mm mmcred/vif collin collinoint;
+run;
+quit;
+/* This brings all VIF < 2 */
+
+/****************************************/
+
+/* MTG, MTGBAL */
+proc reg data=hw_data.insurance_t;
+	model ins= mtg mtgbal/vif collin collinoint;
+run;
+quit;
+/* VIF < 2 */
+
+/* NSF, NSFAMT */
+proc reg data=hw_data.insurance_t;
+	model ins= nsf nsfamt/vif collin collinoint;
+run;
+quit;
+/* VIF < 2 */
+
+/* SAV, SAVBAL */
+proc reg data=hw_data.insurance_t;
+	model ins= sav savbal/vif collin collinoint;
+run;
+quit;
+/* VIF < 2 */
+
+/* POS, POSAMT */
+proc reg data=hw_data.insurance_t;
+	model ins= pos posamt/vif collin collinoint;
+run;
+quit;
+/* VIF = 3.5 */
+
+Objective: investigation of redundancy in catagorical vs catatgorical
+and catagorical vs continuous variables that registered high VIF's*/
+
+/*****************/
+/*MM (binary) and MMCRED (ordinal)*/ 
+
+proc freq data=dt.insurance_t;
+	tables MM MMCRED / plots=freqplot;
+run;
+
+/*basically shows what we are trying to explain: that MM and MMCRED are almost interchangable*/
+proc freq data=dt.insurance_t;
+	table MM*MMCRED / plots=freqplot (twoway=stacked scale=percent);
+run;
+
+/*residuals show why VIF is maybe not the best to use*/
+proc reg data=dt.insurance_t;
+	model MM = MMCRED;
+	output out=check residual=r predicted=p;
+run;
+
+/*spearmans correlation coefficient shows that MM and MMCRED are highly correlated (likley to have linear relationship)*/
+proc corr data=dt.insurance_t spearman nosimple;
+	var MM MMCRED;
+run;
+
+
+/*provides Caramers V*/
+proc freq data = dt.insurance_t;
+  tables MM*MMCRED / chisq;
+run;
+
+/*****************/
+/*MM and MMBAL*/ 
+
+proc glm data=dt.insurance_t
+plots(only) = (diffplot(center)controlplot);
+	class MM;
+	model MMCRED = MM;
+	lsmeans MM / pdiff=all adjust=tukey;
+	lsmeans MM / pdiff=Control('Average/Typical') adjust=dunnett;
+run;
+
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = CRSCORE CRSCORE_log_CRSCORE / clodds=pl clparm=pl;
+	title 'CRSCORE';
+run;
+
+proc logistic data=work.cont_vars;
+	model INS(event = '1') = CRSCORE / clodds=pl clparm=pl;
+	title 'CRSCORE';
+run;
+
+proc gam data=dt.insurance_t
+	plots = components(clm commonaxes);
+	model INS(event='1') = spline(CRSCORE, df=4)
+	/ dist = binomial link = logit;
+run;
